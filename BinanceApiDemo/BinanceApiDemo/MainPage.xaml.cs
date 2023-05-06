@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using BinanceApiDemo.Factories;
+using BinanceApiDemo.Services;
+using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
@@ -12,7 +14,9 @@ namespace BinanceApiDemo
 
             On<iOS>().SetUseSafeArea(true);
 
-            BindingContext = new MainPageViewModel();
+            var binanceApi = BinanceApiFactory.Create();
+            var binanceService = new BinanceService(binanceApi);
+            BindingContext = new MainPageViewModel(binanceService);
         }
     }
 }

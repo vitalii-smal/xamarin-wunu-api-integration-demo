@@ -8,6 +8,14 @@
 
     <CollectionView
         ItemsSource="{Binding Tickets}">
+        <CollectionView.EmptyView>
+            <StackLayout>
+                <Label
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="{Binding Error}" /> 
+            </StackLayout>
+        </CollectionView.EmptyView>
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="data:Ticket">
                 <StackLayout

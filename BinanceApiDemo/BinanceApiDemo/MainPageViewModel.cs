@@ -1,23 +1,20 @@
 using System.Threading.Tasks;
-using BinanceApiDemo.Api;
 using BinanceApiDemo.Data;
-using Refit;
+using BinanceApiDemo.Services;
 using Xamarin.CommunityToolkit.ObjectModel;
-using Xamarin.Forms.Internals;
 
 namespace BinanceApiDemo
 {
     public class MainPageViewModel : ObservableObject
     {
-        private const string BinanceApiUrl = "https://data.binance.com";
-        
-        private readonly IBinanceApi _binanceApi;
+        private readonly IBinanceService _binanceService;
 
         private Ticket[] _tickets;
+        private string _error;
 
-        public MainPageViewModel()
+        public MainPageViewModel(IBinanceService binanceService)
         {
-            _binanceApi = RestService.For<IBinanceApi>(BinanceApiUrl);
+            _binanceService = binanceService;
 
             Task.Run(InitAsync);
         }
@@ -28,16 +25,22 @@ namespace BinanceApiDemo
             set => SetProperty(ref _tickets, value);
         }
 
-        private async Task InitAsync()
+        public string Error
         {
-            var ticketsResponse = await _binanceApi.Get24HTicketsAsync();
-            if (ticketsResponse.IsSuccessStatusCode)
+            get => _error;
+            set => SetProperty(ref _error, value);
+        }
+
+        public async Task InitAsync()
+        {
+            var ticketsResponse = await _binanceService.GetTicketsAsync();
+            if (ticketsResponse.IsSuccessful)
             {
-                Tickets = ticketsResponse.Content;
+                Tickets = ticketsResponse.Data;
             }
             else
             {
-                // ToDo error message
+                Error = ticketsResponse.Error;
             }
         }
     }

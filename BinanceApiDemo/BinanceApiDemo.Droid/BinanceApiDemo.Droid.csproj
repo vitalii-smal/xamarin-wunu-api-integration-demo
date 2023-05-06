@@ -14,7 +14,6 @@
         <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
         <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
         <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-        <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
         <TargetFrameworkVersion>v12.0</TargetFrameworkVersion>
         <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     </PropertyGroup>
@@ -66,7 +65,7 @@
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\BinanceApiDemo\BinanceApiDemo.csproj">
-            <Project>{A83CD585-925E-4D27-B07C-894AFFF1C77C}</Project>
+            <Project>{CE836BA3-ADEF-4548-8E42-80E2144A8653}</Project>
             <Name>BinanceApiDemo</Name>
         </ProjectReference>
     </ItemGroup>
